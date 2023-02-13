@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const db = require('./models')
+const db = require('../models')
 
 // route specific middleware for jwt authorization
 const authLockedRoute = async (req, res, next) => {
