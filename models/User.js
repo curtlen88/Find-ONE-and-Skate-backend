@@ -10,9 +10,13 @@ const UserSchema = new mongoose.Schema({
   },
   password: {
     type: String
-  }
+  },
+  favSpots: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Spot'
+  }]
 }, {
   timestamps: true
 })
 
-module.exports = UserSchema
+module.exports = mongoose.model('User', UserSchema)
