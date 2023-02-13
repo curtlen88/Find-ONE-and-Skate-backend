@@ -43,7 +43,7 @@ router.post('/register', async (req, res) => {
     }
 
     // sign jwt and send back
-    const token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 3600 })
+    const token = await jwt.sign(payload, process.env.JWT_SECRET)
 
     res.json({ token })
   } catch (error) {
@@ -63,13 +63,13 @@ router.post('/login', async (req, res) => {
     const noLoginMessage = 'Incorrect username or password'
 
     // if the user is not found in the db, return and sent a status of 400 with a message
-    if(!foundUser) return res.status(400).json({ msg: noLoginMessage, body: req.body})
+    if(!foundUser) return res.status(400).json({ msg: noLoginMessage })
     
     // check the password from the req body against the password in the database
     const matchPasswords = await bcrypt.compare(req.body.password, foundUser.password)
     
     // if provided password does not match, return an send a status of 400 with a message
-    if(!matchPasswords) return res.status(400).json({ msg: noLoginMessage, body: req.body})
+    if(!matchPasswords) return res.status(400).json({ msg: noLoginMessage })
 
     // create jwt payload
     const payload = {
@@ -79,7 +79,7 @@ router.post('/login', async (req, res) => {
     }
 
     // sign jwt and send back
-    const token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 3600 })
+    const token = await jwt.sign(payload, process.env.JWT_SECRET)
 
     res.json({ token })
   } catch(error) {
@@ -91,6 +91,8 @@ router.post('/login', async (req, res) => {
 
 // GET /auth-locked - will redirect if bad jwt token is found
 router.get('/auth-locked', authLockedRoute, (req, res) => {
+  // we know that if we made it here, the res.locals contains an authorized user
+  console.log('this user has been authorized:', res.locals.user)
   res.json( { msg: 'welcome to the private route!' })
 })
 

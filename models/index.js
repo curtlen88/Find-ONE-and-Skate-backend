@@ -1,28 +1,27 @@
 // require mongoose package
 const mongoose = require("mongoose")
+require('dotenv').config()
 
-const connect = () => {
-  // mongoose config
-  const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/mernAuth'
 
-  mongoose.connect(MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+const dbName = 'mernAuth'
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1/' + dbName
 
-  const db = mongoose.connection;
+mongoose.connect(MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
 
-  // Connection methods
-  db.once('open', () => {
-    console.log(`🔗 Connected to MongoDB at ${db.host}:${db.port}`);
-  });
+const db = mongoose.connection
 
-  db.on('error',  err => {
-    console.error(`🔥 Datacenter burned down:\n${err}`);
-  });
-}
+// Connection methods
+db.once('open', () => {
+  console.log(`🔗 Connected to MongoDB at ${db.host}:${db.port}`)
+})
+
+db.on('error',  err => {
+  console.error(`🔥 Datacenter burned down:\n${err}`)
+})
 
 module.exports = {
-  connect,
-  User: mongoose.model('user', require('./User.js'))
+  User: require('./User'),
 }
