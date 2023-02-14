@@ -35,8 +35,8 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const newSpot = await db.Spot.findOneAndUpdate(
-            { name: req.body.name },
             { lat: req.body.lat, lng: req.body.lng },
+            { name: req.body.name , description: req.body.description },
             { new: true, upsert: true }
         )
         res.json({ newSpot })
