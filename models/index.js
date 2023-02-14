@@ -24,4 +24,5 @@ db.on('error',  err => {
 
 module.exports = {
   User: require('./User'),
+  Spot: require('./Spot')
 }

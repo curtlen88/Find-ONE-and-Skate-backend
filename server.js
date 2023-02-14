@@ -30,6 +30,7 @@ app.get('/', myMiddleware, (req, res) => {
 
 // controllers
 app.use('/users', require('./controllers/users.js'))
+app.use('/spots', require('./controllers/spots.js'))
 
 
 // hey listen
