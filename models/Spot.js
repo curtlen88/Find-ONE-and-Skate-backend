@@ -13,7 +13,11 @@ const spotsSchema = new Schema({
   lng: {
     type: Number,
     required: true,
-  }
+  },
+  description: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model('Spots', spotsSchema)
