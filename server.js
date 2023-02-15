@@ -4,6 +4,7 @@ const express = require('express')
 const cors = require('cors')
 const rowdy = require('rowdy-logger')
 
+
 // config express app
 const app = express()
 const PORT = process.env.PORT || 8000 
@@ -31,6 +32,8 @@ app.get('/', myMiddleware, (req, res) => {
 // controllers
 app.use('/users', require('./controllers/users.js'))
 app.use('/spots', require('./controllers/spots.js'))
+app.use('/images', require('./controllers/images.js'))
+
 
 
 // hey listen
