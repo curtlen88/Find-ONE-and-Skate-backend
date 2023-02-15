@@ -16,10 +16,12 @@ router.get('/', async (req, res) => {
         res.status(500).json({ msg: 'Interval Server Error, Contact the System Administrator' })
     }
 })
-// GET /Spots/:id -- show spot details
-router.get('/:id', async (req, res) => {
+// GET /Spots/:lngLat -- show spot details
+router.get('/click', async (req, res) => {
     try {
-        const spotDetails = await db.Spot.findById(req.params.id)
+        const spotDetails = await db.Spot.findOne(
+            { lat: req.body.lat, lng: req.body.lng }
+        )
         if (!spotDetails) {
             res.status(404).json({ msg: 'spot not found' })
             return 
