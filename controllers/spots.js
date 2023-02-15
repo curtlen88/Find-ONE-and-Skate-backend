@@ -17,10 +17,10 @@ router.get('/', async (req, res) => {
     }
 })
 // GET /Spots/:lngLat -- show spot details
-router.get('/click', async (req, res) => {
+router.get('/:lat/:lng', async (req, res) => {
     try {
         const spotDetails = await db.Spot.findOne(
-            { lat: req.body.lat, lng: req.body.lng }
+            { lat: req.params.lat, lng: req.params.lng }
         )
         if (!spotDetails) {
             res.status(404).json({ msg: 'spot not found' })
