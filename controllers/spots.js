@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
         res.status(500).json({ msg: 'Interval Server Error, Contact the System Administrator' })
     }
 })
-// GET /Spots/:lngLat -- show spot details
+// GET /Spots/:id -- show spot details
 router.get('/:id', async (req, res) => {
     console.log("these are the req params", req.params.id);
     try {
@@ -51,6 +51,23 @@ router.post('/', async (req, res) => {
         res.status(500).json({ msg: 'Server Error' })
     }
 })
+
+// PUT /Spots/:id -- update route
+router.post('/:id', async (req, res) => {
+    console.log("req.body -----", req.body)
+    console.log("req.body.image -----", req.body.image)
+    console.log("req.params.id -----", req.params.id)
+    try {
+        const updatedSpot = await db.Spot.findByIdAndUpdate(req.params.id, {
+            $push: { images: req.body.image }
+        }, { new: true });
+        res.json({ updatedSpot })
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ msg: 'Server Error' })
+    }
+})
+        
 
 // DELETE /Spots/:id -- delete route
 router.delete('/:id', async (req, res) => {
