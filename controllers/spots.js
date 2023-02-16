@@ -35,10 +35,14 @@ router.get('/:id', async (req, res) => {
 
 // POST /Spots -- find or create a new spot
 router.post('/', async (req, res) => {
+    console.log("req.body -----", req.body)
+    console.log("req.body.image -----", req.body.image)
     try {
         const newSpot = await db.Spot.findOneAndUpdate(
             { lat: req.body.lat, lng: req.body.lng },
-            { name: req.body.name , description: req.body.description },
+            {
+                name: req.body.name, description: req.body.description, $push: { images: req.body.image, videos: req.body.video } 
+            },
             { new: true, upsert: true }
         )
         res.json({ newSpot })

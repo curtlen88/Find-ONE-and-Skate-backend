@@ -12,17 +12,14 @@ router.post('/', uploads.single('image'), async (req, res) => {
     if (!req.file) {
       return res.status(400).json({ msg: 'no file uploaded' });
     }
-
     // upload to cloudinary
     const cloudImageData = await cloudinary.uploader.upload(req.file.path);
-
     // load image data. public_id save this to the db
-    const cloudImage = `https://res.cloudinary.com/findoneandskate/image/upload/v1593119998/${cloudImageData.public_id}.png`;
-
+    const cloudImage = `https://res.cloudinary.com/dfmyqdv8d/image/upload/v1593119998/${cloudImageData.public_id}.png`;
     // delete file from server
     unlinkSync(req.file.path);
-
     // send back the image url
+    console.log("post route ----", cloudImage);
     res.json({ cloudImage });
   } catch (error) {
     console.log(error);
@@ -36,6 +33,7 @@ router.get('/', async (req, res) => {
         // get the images from cloudinary
         const cloudImages = await cloudinary.api.resources()
         // send back the images
+        console.log("get all route clg - ", cloudImages)
         res.json({ cloudImages })
     } catch (error) {
         console.log(error)
