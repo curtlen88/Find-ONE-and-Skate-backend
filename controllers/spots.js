@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
         res.status(500).json({ msg: 'Interval Server Error, Contact the System Administrator' })
     }
 })
-// GET /Spots/:lngLat -- show spot details
+// GET /Spots/:id -- show spot details
 router.get('/:id', async (req, res) => {
     console.log("these are the req params", req.params.id);
     try {
