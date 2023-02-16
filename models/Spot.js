@@ -18,6 +18,14 @@ const spotsSchema = new Schema({
     type: String,
     required: true,
   },
+  images: [{
+    type: String,
+    required: true,
+  }],
+  videos: [{
+    type: String,
+    required: true,
+  }],
 });
 
 module.exports = mongoose.model('Spots', spotsSchema)
