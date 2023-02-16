@@ -20,11 +20,11 @@ const spotsSchema = new Schema({
   },
   images: [{
     type: String,
-    required: true,
+    required: false,
   }],
   videos: [{
     type: String,
-    required: true,
+    required: false,
   }],
 });
 
