@@ -33,6 +33,8 @@ app.get('/', myMiddleware, (req, res) => {
 app.use('/users', require('./controllers/users.js'))
 app.use('/spots', require('./controllers/spots.js'))
 app.use('/images', require('./controllers/images.js'))
+// app.use('/videos', require('./controllers/videos.js'))
+app.use('/favorites', require('./controllers/favorites.js'))
 
 
 
