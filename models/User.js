@@ -13,6 +13,7 @@ const UserSchema = new mongoose.Schema({
   },
   favSpots: [{
     type: mongoose.Schema.Types.ObjectId,
+    
     ref: 'Spot'
   }]
 }, {
