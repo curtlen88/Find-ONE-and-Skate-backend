@@ -5,7 +5,18 @@ const jwt = require('jsonwebtoken')
 const authLockedRoute = require('./authLockedRoute')
 
 
-// GET /users - get all users and add the favorite spot details to the arrya 
+// GET /users - get all users and add the favorite spot details to the array
+router.get('/:id', async (req, res) => {
+  try {
+    const user = await db.User.findById(req.params.id)
+    .populate('favSpots')
+    console.log(user);
+    res.json(user)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ msg: 'server error' })
+  }
+})
 
 
 // POST /users/register - CREATE new user
