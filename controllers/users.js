@@ -5,10 +5,8 @@ const jwt = require('jsonwebtoken')
 const authLockedRoute = require('./authLockedRoute')
 
 
-// GET /users - test endpoint
-router.get('/', (req, res) => {
-  res.json({ msg: 'welcome to the users endpoint' })
-})
+// GET /users - get all users and add the favorite spot details to the arrya 
+
 
 // POST /users/register - CREATE new user
 router.post('/register', async (req, res) => {
